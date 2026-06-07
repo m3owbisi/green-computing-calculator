@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Cloud Carbon Calculator</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .calculator {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #111; /* Dark gray background */
+            padding: 20px;
+        }
+        label, select, button, input[type="text"] {
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            padding: 10px;
+            border: 1px solid #444;
+            background-color: #333; /* Dark gray input background */
+            border-radius: 5px;
+        }
+        button {
+            background-color: #1a1a1a;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #bfbfbf;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Carbon Footprint in Cloud Computing</h1>
+        <p>Cloud computing plays a significant role in our daily lives. By understanding and accounting for the carbon emissions associated with cloud services, we can take steps towards a greener and more sustainable future.</p>
+
+        <div class="calculator">
+            <label for="powerUsage">Server Power Usage (in watts):</label>
+            <input type="text" id="powerUsage" placeholder="Enter power usage">
+            <br><br>
+
+            <label for="usageDuration">Usage Duration (in hours per day):</label>
+            <input type="text" id="usageDuration" placeholder="Enter usage duration">
+            <br><br>
+
+            <label for="efficiency">Server Efficiency (in percentage):</label>
+            <input type="text" id="efficiency" placeholder="Enter server efficiency">
+            <br><br>
+
+	<!-- ... (previous HTML code) ... -->
+<label for="virtualMachines">Number of Virtual Machines:</label>
+<input type="text" id="virtualMachines" placeholder="Enter the number of virtual machines">
+<br><br>
+<!-- ... (rest of the HTML code) ... -->
+
+
+            <label for="location">Data Center Location:</label>
+            <select id="location">
+                <option value="us">United States</option>
+                <option value="eu">Europe</option>
+                <option value="asia">Asia</option>
+                <!-- Add more location options as needed -->
+            </select>
+            <br><br>
+
+            <button onclick="calculateCarbon()">Calculate Carbon Emissions</button>
+            <p id="result"></p>
+        </div>
+
+    </div>
+    <script>
+        function calculateCarbon() {
+            const powerUsage = parseFloat(document.getElementById("powerUsage").value);
+            const usageDuration = parseFloat(document.getElementById("usageDuration").value);
+            const efficiency = parseFloat(document.getElementById("efficiency").value);
+            const location = document.getElementById("location").value;
+
+            if (isNaN(powerUsage) || isNaN(usageDuration) || isNaN(efficiency) || powerUsage <= 0 || usageDuration <= 0 || efficiency <= 0) {
+                document.getElementById("result").textContent = "Please enter valid values for power usage, usage duration, and efficiency.";
+                return;
+            }
+
+            const locationFactor = {
+                "us": 0.0002,
+                "eu": 0.0003,
+                "asia": 0.0004
+            };
+
+            const carbonEmissions = (powerUsage * usageDuration * 365 * efficiency * locationFactor[location]);
+
+            document.getElementById("result").textContent = `Estimated Annual Carbon Emissions: ${carbonEmissions.toFixed(3)} metric tons of CO2.`;
+        }
+    </script>
+</body>
+</html>
